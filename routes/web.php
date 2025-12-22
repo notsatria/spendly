@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\SignInController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\SignUpController;
 
@@ -53,12 +54,10 @@ Route::get('/bar-chart', function () {
 
 
 // authentication pages
-Route::get('/signin', function () {
-    return view('pages.auth.signin', ['title' => 'Sign In']);
-})->name('signin');
+Route::get('/signin', [SignInController::class, 'show'])->name('signin');
+Route::post('/signin', [SignInController::class, 'login'])->name('signin');
 
 Route::get('/signup', [SignUpController::class, 'show'])->name('signup');
-
 Route::post('/signup', [SignUpController::class, 'store'])->name('signup');
 
 // ui elements pages
