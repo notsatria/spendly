@@ -16,12 +16,11 @@ Kamu bisa copy ini ke:
 
 ## 🟢 PHASE 0 – Project Setup
 
--   [ ] Create Laravel project
--   [ ] Setup `.env` (DB, APP_KEY)
--   [ ] Setup database (MySQL / PostgreSQL)
--   [ ] Run initial migration
--   [ ] Setup Git repository
--   [ ] Create initial commit
+-   [x] Create Laravel project
+-   [x] Setup `.env` (DB, APP_KEY)
+-   [x] Setup database (MySQL / PostgreSQL)
+-   [x] Run initial migration
+-   [x] Setup Git repository
 
 ---
 

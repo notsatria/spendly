@@ -52,7 +52,8 @@
                                 <span class="bg-white p-2 text-gray-400 sm:px-5 sm:py-2 dark:bg-gray-900">Or</span>
                             </div>
                         </div>
-                        <form>
+                        <form action="{{ route('signup') }}" method="POST" >
+                            @csrf
                             <div class="space-y-5">
                                 <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
                                     <!-- First Name -->
@@ -63,6 +64,9 @@
                                         <input type="text" id="fname" name="fname"
                                             placeholder="Enter your first name"
                                             class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30" />
+                                            @error('fname')
+                                                <p class="text-red-500 text-sm">{{ $message }}</p>
+                                            @enderror
                                     </div>
                                     <!-- Last Name -->
                                     <div class="sm:col-span-1">
@@ -72,6 +76,9 @@
                                         <input type="text" id="lname" name="lname"
                                             placeholder="Enter your last name"
                                             class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30" />
+                                              @error('lname')
+                                                <p class="text-red-500 text-sm">{{ $message }}</p>
+                                            @enderror
                                     </div>
                                 </div>
                                 <!-- Email -->
@@ -81,6 +88,9 @@
                                     </label>
                                     <input type="email" id="email" name="email" placeholder="Enter your email"
                                         class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30" />
+                                          @error('email')
+                                                <p class="text-red-500 text-sm">{{ $message }}</p>
+                                            @enderror
                                 </div>
                                 <!-- Password -->
                                 <div>
@@ -88,7 +98,7 @@
                                         Password<span class="text-error-500">*</span>
                                     </label>
                                     <div x-data="{ showPassword: false }" class="relative">
-                                        <input :type="showPassword ? 'text' : 'password'" placeholder="Enter your password"
+                                        <input :type="showPassword ? 'text' : 'password'" placeholder="Enter your password" id="password" name="password"
                                             class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent py-2.5 pr-11 pl-4 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30" />
                                         <span @click="showPassword = !showPassword"
                                             class="absolute top-1/2 right-4 z-30 -translate-y-1/2 cursor-pointer text-gray-500 dark:text-gray-400">
@@ -100,6 +110,9 @@
                                             </svg>
                                         </span>
                                     </div>
+                                      @error('password')
+                                                <p class="text-red-500 text-sm">{{ $message }}</p>
+                                        @enderror
                                 </div>
                                 <!-- Checkbox -->
                                 <div>
@@ -133,12 +146,13 @@
                                 </div>
                                 <!-- Button -->
                                 <div>
-                                    <button
+                                    <button type="submit"
                                         class="bg-brand-500 shadow-theme-xs hover:bg-brand-600 flex w-full items-center justify-center rounded-lg px-4 py-3 text-sm font-medium text-white transition">
                                         Sign Up
                                     </button>
                                 </div>
                             </div>
+
                         </form>
                         <div class="mt-5">
                             <p class="text-center text-sm font-normal text-gray-700 sm:text-start dark:text-gray-400">
