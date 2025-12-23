@@ -24,7 +24,7 @@ class SignInController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboard')->with('success', 'Welcome back!');
         }
 
         return back()->withErrors([

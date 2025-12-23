@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\SignInController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\SignUpController;
@@ -9,8 +10,18 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', function () {
         return view('pages.dashboard.ecommerce', ['title' => 'E-commerce Dashboard']);
     })->name('dashboard');
+
+    Route::post('/logout', LogoutController::class)->name('logout');
 });
 
+Route::middleware(['guest'])->group(function () {
+    // authentication pages
+    Route::get('/signin', [SignInController::class, 'show'])->name('signin');
+    Route::post('/signin', [SignInController::class, 'login'])->name('signin');
+
+    Route::get('/signup', [SignUpController::class, 'show'])->name('signup');
+    Route::post('/signup', [SignUpController::class, 'store'])->name('signup');
+});
 
 // calender pages
 Route::get('/calendar', function () {
@@ -51,14 +62,6 @@ Route::get('/line-chart', function () {
 Route::get('/bar-chart', function () {
     return view('pages.chart.bar-chart', ['title' => 'Bar Chart']);
 })->name('bar-chart');
-
-
-// authentication pages
-Route::get('/signin', [SignInController::class, 'show'])->name('signin');
-Route::post('/signin', [SignInController::class, 'login'])->name('signin');
-
-Route::get('/signup', [SignUpController::class, 'show'])->name('signup');
-Route::post('/signup', [SignUpController::class, 'store'])->name('signup');
 
 // ui elements pages
 Route::get('/alerts', function () {

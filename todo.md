@@ -28,11 +28,11 @@ Kamu bisa copy ini ke:
 
 ### Backend
 
--   [ ] Setup auth (Laravel Breeze / custom)
--   [ ] Create login endpoint
--   [ ] Create register endpoint
--   [ ] Create logout endpoint
--   [ ] Protect routes with auth middleware
+-   [x] Setup auth (Laravel Breeze / custom)
+-   [x] Create login endpoint
+-   [x] Create register endpoint
+-   [x] Create logout endpoint
+-   [x] Protect routes with auth middleware
 
 ### Frontend (Blade)
 
