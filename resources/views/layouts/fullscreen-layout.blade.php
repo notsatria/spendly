@@ -92,7 +92,7 @@
     </script>
 </head>
 
-<body x-data="{ 'loaded': true}" x-init="$store.sidebar.isExpanded = window.innerWidth >= 1280;
+<body x-data="{ 'loaded': true }" x-init="$store.sidebar.isExpanded = window.innerWidth >= 1280;
 const checkMobile = () => {
     if (window.innerWidth < 1280) {
         $store.sidebar.setMobileOpen(false);
@@ -105,8 +105,18 @@ const checkMobile = () => {
 window.addEventListener('resize', checkMobile);">
 
     {{-- preloader --}}
-    <x-common.preloader/>
+    <x-common.preloader />
     {{-- preloader end --}}
+    @if (session('success'))
+        <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)" x-show="show" x-transition
+            class="absolute m-4 top-4 right-4 z-[999999]">
+            <x-ui.alert variant="success" title="Success" message="{{ session('success') }}" />
+        </div>
+    @endif
+
+    @if (session('error'))
+        <x-ui.alert variant="error" title="Error" message="{{ session('error') }}" />
+    @endif
 
     @yield('content')
 

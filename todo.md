@@ -36,9 +36,9 @@ Kamu bisa copy ini ke:
 
 ### Frontend (Blade)
 
--   [ ] Login page UI
--   [ ] Register page UI
--   [ ] Validation error handling
+-   [x] Login page UI
+-   [x] Register page UI
+-   [x] Validation error handling
 -   [ ] Flash message for auth status
 
 ---

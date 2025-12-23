@@ -90,26 +90,32 @@
             }
         })();
     </script>
-    
+
 </head>
 
-<body
-    x-data="{ 'loaded': true}"
-    x-init="$store.sidebar.isExpanded = window.innerWidth >= 1280;
-    const checkMobile = () => {
-        if (window.innerWidth < 1280) {
-            $store.sidebar.setMobileOpen(false);
-            $store.sidebar.isExpanded = false;
-        } else {
-            $store.sidebar.isMobileOpen = false;
-            $store.sidebar.isExpanded = true;
-        }
-    };
-    window.addEventListener('resize', checkMobile);">
+<body x-data="{ 'loaded': true }" x-init="$store.sidebar.isExpanded = window.innerWidth >= 1280;
+const checkMobile = () => {
+    if (window.innerWidth < 1280) {
+        $store.sidebar.setMobileOpen(false);
+        $store.sidebar.isExpanded = false;
+    } else {
+        $store.sidebar.isMobileOpen = false;
+        $store.sidebar.isExpanded = true;
+    }
+};
+window.addEventListener('resize', checkMobile);">
 
     {{-- preloader --}}
-    <x-common.preloader/>
+    <x-common.preloader />
     {{-- preloader end --}}
+
+    @if (session('success'))
+        <x-ui.alert variant="success" title="Success" message="{{ session('success') }}" />
+    @endif
+
+    @if (session('error'))
+        <x-ui.alert variant="error" title="Error" message="{{ session('error') }}" />
+    @endif
 
     <div class="min-h-screen xl:flex">
         @include('layouts.backdrop')
