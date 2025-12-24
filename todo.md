@@ -39,7 +39,7 @@ Kamu bisa copy ini ke:
 -   [x] Login page UI
 -   [x] Register page UI
 -   [x] Validation error handling
--   [ ] Flash message for auth status
+-   [x] Flash message for auth status
 
 ---
 
@@ -47,9 +47,9 @@ Kamu bisa copy ini ke:
 
 ### Backend
 
--   [ ] Create Category model
--   [ ] Define User → Categories relationship
--   [ ] Create CategoryController
+-   [x] Create Category model
+-   [x] Define User → Categories relationship
+-   [x] Create CategoryController
 -   [ ] Create CategoryRequest validation
 -   [ ] Create CRUD endpoints:
 
