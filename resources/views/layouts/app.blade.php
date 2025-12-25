@@ -109,14 +109,6 @@ window.addEventListener('resize', checkMobile);">
     <x-common.preloader />
     {{-- preloader end --}}
 
-    @if (session('success'))
-        <x-ui.alert variant="success" title="Success" message="{{ session('success') }}" />
-    @endif
-
-    @if (session('error'))
-        <x-ui.alert variant="error" title="Error" message="{{ session('error') }}" />
-    @endif
-
     <div class="min-h-screen xl:flex">
         @include('layouts.backdrop')
         @include('layouts.sidebar')
@@ -131,6 +123,13 @@ window.addEventListener('resize', checkMobile);">
             @include('layouts.app-header')
             <!-- app header end -->
             <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
+                @if (session('success'))
+                    <x-ui.alert variant="success" title="Success" message="{{ session('success') }}" />
+                @endif
+
+                @if (session('error'))
+                    <x-ui.alert variant="error" title="Error" message="{{ session('error') }}" />
+                @endif
                 @yield('content')
             </div>
         </div>

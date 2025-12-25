@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\CategoryType;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Enum;
 
@@ -45,8 +46,11 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function getAll(Request $request)
+    public function destroy($id)
     {
-        $categories = $request->user()->categories();
+        $category = Category::findOrFail($id);
+        $category->delete();
+
+        return redirect()->route('categories')->with('success', 'Category deleted successfully');
     }
 }

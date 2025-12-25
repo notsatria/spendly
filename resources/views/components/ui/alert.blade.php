@@ -49,7 +49,9 @@
     $icon = $icons[$variant] ?? $icons['info'];
 @endphp
 
-<div class="rounded-xl border p-4 {{ $containerClass }}">
+<div x-data="{ show: true }" x-init="setTimeout(() => show = false, 5000)" x-show="show" x-transition:leave="transition ease-in duration-300"
+    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+    class="rounded-xl border p-4 {{ $containerClass }} mb-4">
     <div class="flex items-start gap-3">
         <div class="-mt-0.5 {{ $iconClass }}">
             {!! $icon !!}
@@ -76,5 +78,12 @@
             {{-- Slot for custom content --}}
             {{ $slot }}
         </div>
+        <button @click="show = false" class="text-gray-400 hover:text-gray-500">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                </path>
+            </svg>
+        </button>
     </div>
 </div>

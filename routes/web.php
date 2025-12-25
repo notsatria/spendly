@@ -14,7 +14,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/logout', LogoutController::class)->name('logout');
 
+    // Categories
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+    Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 });
 
 Route::middleware(['guest'])->group(function () {

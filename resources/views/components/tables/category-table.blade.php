@@ -4,7 +4,7 @@
         <!-- Header -->
         <div class="flex flex-col gap-2 px-5 mb-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
             <div>
-                <h3 class="text-lg font-semibold text-gray-800 dark:text-white/90">Latest Transactions</h3>
+                <h3 class="text-lg font-semibold text-gray-800 dark:text-white/90">Category List</h3>
             </div>
             <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
                 <form>
@@ -79,16 +79,21 @@
                                             </x-slot>
 
                                             <x-slot name="content">
-                                                <a href="#"
-                                                    class="flex w-full px-3 py-2 font-medium text-left text-gray-500 rounded-lg text-theme-xs hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
-                                                    role="menuitem">
-                                                    View More
-                                                </a>
-                                                <a href="#"
-                                                    class="flex w-full px-3 py-2 font-medium text-left text-gray-500 rounded-lg text-theme-xs hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
-                                                    role="menuitem">
-                                                    Delete
-                                                </a>
+                                                <form action="{{ route('categories.destroy', $category->id) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    <a href="#"
+                                                        class="flex w-full px-3 py-2 font-medium text-left text-gray-500 rounded-lg text-theme-xs hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
+                                                        role="menuitem">
+                                                        View More
+                                                    </a>
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="flex w-full px-3 py-2 font-medium text-left text-gray-500 rounded-lg text-theme-xs hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
+                                                        role="menuitem">
+                                                        Delete
+                                                    </button>
+                                                </form>
                                             </x-slot>
                                         </x-common.table-dropdown>
                                     </div>
