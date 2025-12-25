@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\SignInController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\SignUpController;
+use App\Http\Controllers\CategoryController;
 
 Route::middleware(['auth'])->group(function () {
     // dashboard pages
@@ -12,6 +13,8 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard');
 
     Route::post('/logout', LogoutController::class)->name('logout');
+
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
 });
 
 Route::middleware(['guest'])->group(function () {

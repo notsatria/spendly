@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,7 +11,8 @@ class SignInController extends Controller
 {
     public function show()
     {
-        return view('pages.auth.signin', ["title" => "Sign In"]);
+        $title = "Sign In";
+        return view('pages.auth.signin', compact("title"));
     }
 
     public function login(Request $request)

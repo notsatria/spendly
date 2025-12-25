@@ -11,4 +11,9 @@ class Category extends Model
         'name',
         'type'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

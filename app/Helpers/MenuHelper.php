@@ -15,6 +15,11 @@ class MenuHelper
                 ],
             ],
             [
+                'icon' => 'forms',
+                'name' => 'Categories',
+                'path' => '/categories',
+            ],
+            [
                 'icon' => 'calendar',
                 'name' => 'Calendar',
                 'path' => '/calendar',
