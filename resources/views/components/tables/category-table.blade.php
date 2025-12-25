@@ -18,7 +18,10 @@
                             </svg>
                         </button>
                         <input type="text" placeholder="Search..."
-                            class="h-[42px] w-full rounded-lg border border-gray-300 bg-transparent py-2.5 pl-[42px] pr-4 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-blue-800 xl:w-[300px]" />
+                            class="h-[42px] w-full rounded-lg border border-gray-300 bg-transparent py-2.5 pl-[42px] pr-4 mr-2 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-blue-800 xl:w-[300px]" />
+                        <a href="{{ route('categories.add') }}">
+                            <x-ui.button size="sm" class="ml-auto">Add Category</x-ui.button>
+                        </a>
                     </div>
                 </form>
             </div>
@@ -45,7 +48,7 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-                        @foreach ($categories as $index => $category)
+                        @forelse ($categories as $index => $category)
                             <tr>
                                 <td class="py-4 whitespace-nowrap">
                                     <span class="ml-4 flex items-center dark:text-white">{{ $index + 1 }}</span>
@@ -60,7 +63,12 @@
                                 </td>
                                 <td class="px-4 py-4 whitespace-nowrap">
                                     <span
-                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full @if ($category->type === App\Enums\CategoryType::INCOME) 'bg-green-50 text-green-700 dark:bg-green-500/15 dark:text-green-500' @else 'bg-red-50 text-red-700 dark:bg-red-500/15 dark:text-red-500' @endif">{{ $category->type }}</span>
+                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
+  {{ $category->type === App\Enums\CategoryType::INCOME
+      ? 'bg-green-50 text-green-700 dark:bg-green-500/15 dark:text-green-500'
+      : 'bg-red-50 text-red-700 dark:bg-red-500/15 dark:text-red-500' }}">
+                                        {{ $category->type->value }}
+                                    </span>
                                 </td>
                                 <td class="px-4 py-4 text-sm font-medium text-right whitespace-nowrap">
                                     <div class="flex justify-center relative">
@@ -102,7 +110,14 @@
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="4"
+                                    class="py-4 whitespace-nowrap text-center text-gray-500 dark:text-gray-400">
+                                    No category found.
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

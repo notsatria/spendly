@@ -2,23 +2,27 @@
 
 @php
     use App\Enums\CategoryType;
-    $breadcrumbs = [['title' => 'Categories', 'url' => route('categories')], ['title' => 'Edit Category']];
+    $breadcrumbs = [['title' => 'Categories', 'url' => route('categories')], ['title' => 'Add Category']];
 @endphp
 
 @section('content')
-    <x-common.page-breadcrumb pageTitle="Edit Category" :breadcrumbs="$breadcrumbs" />
+    <x-common.page-breadcrumb pageTitle="Add Category" :breadcrumbs="$breadcrumbs" />
     <div class="grid grid-cols-1">
         <x-common.component-card title="Category">
-            <form action="{{ route('categories.update', $category->id) }}" method="POST" class="w-full flex flex-col gap-4">
+            <form action="{{ route('categories.store') }}" method="POST" class="w-full flex flex-col gap-4">
                 @csrf
-                @method('PUT')
                 <div>
                     <label for="name" class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
                         Name
                     </label>
                     <input type="text" id="name" name="name"
                         class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30"
-                        value="{{ old('name', $category->name) }}" />
+                        value="" placeholder="Example: Entertainment" />
+                    @error('name')
+                        <p class="text-theme-xs text-error-500 mt-1.5">
+                            {{ $message }}
+                        </p>
+                    @enderror
                 </div>
                 <div>
                     <label for="type" class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
@@ -31,7 +35,7 @@
                                 Select Option
                             </option>
                             @foreach (CategoryType::cases() as $type)
-                                <option value="{{ $type->value }}" @selected(old('type', $category->type->value) == $type->value)
+                                <option value="{{ $type->value }}"
                                     class="text-gray-700 dark:bg-gray-900 dark:text-gray-400">
                                     {{ ucfirst($type->value) }}
                                 </option>
@@ -48,7 +52,7 @@
                     </div>
                 </div>
                 <div class="flex justify-end mt-2">
-                    <x-ui.button size="sm" class="ml-auto" type="submit">Update Category</x-ui.button>
+                    <x-ui.button size="sm" class="ml-auto" type="submit">Add Category</x-ui.button>
                 </div>
             </form>
         </x-common.component-card>

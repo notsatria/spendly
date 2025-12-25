@@ -50,22 +50,22 @@ Kamu bisa copy ini ke:
 -   [x] Create Category model
 -   [x] Define User → Categories relationship
 -   [x] Create CategoryController
--   [ ] Create CategoryRequest validation
--   [ ] Create CRUD endpoints:
+-   [x] Create CategoryRequest validation
+-   [x] Create CRUD endpoints:
 
-    -   [ ] List categories
-    -   [ ] Create category
-    -   [ ] Update category
-    -   [ ] Delete category
+    -   [x] List categories
+    -   [x] Create category
+    -   [x] Update category
+    -   [x] Delete category
 
--   [ ] Restrict category access by user
+-   [x] Restrict category access by user
 -   [ ] Prevent deleting category with transactions
 
 ### Frontend
 
--   [ ] Category list page
--   [ ] Add category form
--   [ ] Edit category form
+-   [x] Category list page
+-   [x] Add category form
+-   [x] Edit category form
 -   [ ] Delete category confirmation modal
 
 ---

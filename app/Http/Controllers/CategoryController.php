@@ -13,7 +13,7 @@ class CategoryController extends Controller
     {
         $categories = $request->user()
             ->categories()
-            ->latest()
+            ->orderBy('type', 'asc')
             ->get();
 
         return view('pages.categories.index', compact('categories'));
@@ -32,7 +32,7 @@ class CategoryController extends Controller
         $request->user()->categories()->create($validated);
 
         return redirect()
-            ->back()
+            ->route('categories')
             ->with('success', 'Category has been added');
     }
 
@@ -67,5 +67,10 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
         return view('pages.categories.edit', compact('category'));
+    }
+
+    public function add()
+    {
+        return view('pages.categories.add');
     }
 }
