@@ -16,7 +16,7 @@ class CategoryController extends Controller
             ->latest()
             ->get();
 
-        return view('pages.categories', compact('categories'));
+        return view('pages.categories.index', compact('categories'));
     }
 
     /**
@@ -41,8 +41,17 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $category = Category::findOrFail($id);
+
         $validated = $request->validate([
             'name' => 'string|min:3',
+            'type' => ['required', new Enum(CategoryType::class)],
+        ]);
+
+        $category->update($validated);
+
+        return redirect()->route('categories.edit', $id)->with([
+            'success' => 'Category updated successfully'
         ]);
     }
 
@@ -52,5 +61,11 @@ class CategoryController extends Controller
         $category->delete();
 
         return redirect()->route('categories')->with('success', 'Category deleted successfully');
+    }
+
+    public function edit($id)
+    {
+        $category = Category::findOrFail($id);
+        return view('pages.categories.edit', compact('category'));
     }
 }

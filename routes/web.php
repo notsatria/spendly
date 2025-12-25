@@ -17,6 +17,8 @@ Route::middleware(['auth'])->group(function () {
     // Categories
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
     Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+    Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+    Route::put('/categories/{category}/update', [CategoryController::class, 'update'])->name('categories.update');
 });
 
 Route::middleware(['guest'])->group(function () {

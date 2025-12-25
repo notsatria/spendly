@@ -60,7 +60,7 @@
                                 </td>
                                 <td class="px-4 py-4 whitespace-nowrap">
                                     <span
-                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full @if ($category->type == 'income') 'bg-green-50 text-green-700 dark:bg-green-500/15 dark:text-green-500' @else 'bg-red-50 text-red-700 dark:bg-red-500/15 dark:text-red-500' @endif">{{ $category->type }}</span>
+                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full @if ($category->type === App\Enums\CategoryType::INCOME) 'bg-green-50 text-green-700 dark:bg-green-500/15 dark:text-green-500' @else 'bg-red-50 text-red-700 dark:bg-red-500/15 dark:text-red-500' @endif">{{ $category->type }}</span>
                                 </td>
                                 <td class="px-4 py-4 text-sm font-medium text-right whitespace-nowrap">
                                     <div class="flex justify-center relative">
@@ -79,14 +79,17 @@
                                             </x-slot>
 
                                             <x-slot name="content">
-                                                <form action="{{ route('categories.destroy', $category->id) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    <a href="#"
+                                                <form action="{{ route('categories.edit', $category->id) }}"
+                                                    method="GET">
+                                                    <button type="submit"
                                                         class="flex w-full px-3 py-2 font-medium text-left text-gray-500 rounded-lg text-theme-xs hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
                                                         role="menuitem">
                                                         View More
-                                                    </a>
+                                                    </button>
+                                                </form>
+                                                <form action="{{ route('categories.destroy', $category->id) }}"
+                                                    method="POST">
+                                                    @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
                                                         class="flex w-full px-3 py-2 font-medium text-left text-gray-500 rounded-lg text-theme-xs hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
