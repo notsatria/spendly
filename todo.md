@@ -74,11 +74,11 @@ Kamu bisa copy ini ke:
 
 ### Backend
 
--   [ ] Create Transaction model
--   [ ] Define relationships:
+-   [x] Create Transaction model
+-   [x] Define relationships:
 
-    -   [ ] User → Transactions
-    -   [ ] Category → Transactions
+    -   [x] User → Transactions
+    -   [x] Category → Transactions
 
 -   [ ] Create TransactionController
 -   [ ] Create TransactionRequest validation
