@@ -80,7 +80,7 @@ Kamu bisa copy ini ke:
     -   [x] User → Transactions
     -   [x] Category → Transactions
 
--   [ ] Create TransactionController
+-   [x] Create TransactionController
 -   [ ] Create TransactionRequest validation
 -   [ ] CRUD endpoints:
 

@@ -15,6 +15,11 @@ class MenuHelper
                 ],
             ],
             [
+                'icon' => 'tables',
+                'name' => 'Transactions',
+                'path' => '/transactions',
+            ],
+            [
                 'icon' => 'forms',
                 'name' => 'Categories',
                 'path' => '/categories',

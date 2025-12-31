@@ -1,10 +1,10 @@
-@props(['categories'])
+@props(['transactions'])
 <div x-data="{ dropdownOpen: null }">
     <div class="rounded-2xl border border-gray-200 bg-white pt-4 dark:border-gray-800 dark:bg-white/[0.03]">
         <!-- Header -->
         <div class="flex flex-col gap-2 px-5 mb-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
             <div>
-                <h3 class="text-lg font-semibold text-gray-800 dark:text-white/90">Category List</h3>
+                <h3 class="text-lg font-semibold text-gray-800 dark:text-white/90">Latest Transactions</h3>
             </div>
             <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
                 <form>
@@ -19,8 +19,8 @@
                         </button>
                         <input type="text" placeholder="Search..."
                             class="h-[42px] w-full rounded-lg border border-gray-300 bg-transparent py-2.5 pl-[42px] pr-4 mr-2 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-blue-800 xl:w-[300px]" />
-                        <a href="{{ route('categories.create') }}">
-                            <x-ui.button size="sm" class="ml-auto">Add Category</x-ui.button>
+                        <a href="{{ route('transactions.create') }}">
+                            <x-ui.button size="sm" class="ml-auto">Add Transaction</x-ui.button>
                         </a>
                     </div>
                 </form>
@@ -38,17 +38,23 @@
                                 No</th>
                             <th scope="col"
                                 class="px-4 py-3 font-normal text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                Name</th>
+                                Date</th>
                             <th scope="col"
                                 class="px-4 py-3 font-normal text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                                Type</th>
+                                Note</th>
+                            <th scope="col"
+                                class="px-4 py-3 font-normal text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                                Amount</th>
+                            <th scope="col"
+                                class="px-4 py-3 font-normal text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                                Category</th>
                             <th scope="col" class="relative px-4 py-3 capitalize">
                                 <span class="sr-only">Actions</span>
                             </th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-                        @forelse ($categories as $index => $category)
+                        @forelse ($transactions as $index => $transaction)
                             <tr>
                                 <td class="py-4 whitespace-nowrap">
                                     <span class="ml-4 flex items-center dark:text-white">{{ $index + 1 }}</span>
@@ -57,18 +63,34 @@
                                     <div class="flex items-center">
                                         <div class="ml-4">
                                             <div class="text-sm font-medium text-gray-900 dark:text-white">
-                                                {{ $category->name }}</div>
+                                                {{ $transaction->transaction_date->timezone('Asia/Jakarta')->format('l, d M Y H:i') }}
+                                            </div>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="px-4 py-4 whitespace-nowrap">
-                                    <span
-                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
-  {{ $category->type === App\Enums\CategoryType::INCOME
-      ? 'bg-green-50 text-green-700 dark:bg-green-500/15 dark:text-green-500'
-      : 'bg-red-50 text-red-700 dark:bg-red-500/15 dark:text-red-500' }}">
-                                        {{ $category->type->value }}
-                                    </span>
+                                <td class="py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900 dark:text-white">
+                                                {{ $transaction->note }}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900 dark:text-white">
+                                                {{ $transaction->amount }}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900 dark:text-white">
+                                                {{ $transaction->category->name }}</div>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td class="px-4 py-4 text-sm font-medium text-right whitespace-nowrap">
                                     <div class="flex justify-center relative">
@@ -87,7 +109,8 @@
                                             </x-slot>
 
                                             <x-slot name="content">
-                                                <form action="{{ route('categories.edit', $category->id) }}"
+                                                <form
+                                                    action="{{ route('transactions.edit', $transaction->category_id) }}"
                                                     method="GET">
                                                     <button type="submit"
                                                         class="flex w-full px-3 py-2 font-medium text-left text-gray-500 rounded-lg text-theme-xs hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
@@ -95,7 +118,8 @@
                                                         View More
                                                     </button>
                                                 </form>
-                                                <form action="{{ route('categories.destroy', $category->id) }}"
+                                                <form
+                                                    action="{{ route('transactions.destroy', $transaction->category_id) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('DELETE')
@@ -112,9 +136,9 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4"
+                                <td colspan="6"
                                     class="py-4 whitespace-nowrap text-center text-gray-500 dark:text-gray-400">
-                                    No category found.
+                                    No transaction found.
                                 </td>
                             </tr>
                         @endforelse

@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\SignInController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\SignUpController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TransactionController;
 
 Route::middleware(['auth'])->group(function () {
     // dashboard pages
@@ -16,11 +17,19 @@ Route::middleware(['auth'])->group(function () {
 
     // Categories
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
-    Route::get('/categories/add', [CategoryController::class, 'add'])->name('categories.add');
+    Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
     Route::post('/categories/store', [CategoryController::class, 'store'])->name('categories.store');
     Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
     Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
     Route::put('/categories/{category}/update', [CategoryController::class, 'update'])->name('categories.update');
+
+    // Transactions
+    Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions');
+    Route::get('/transactions/create', [TransactionController::class, 'create'])->name('transactions.create');
+    Route::post('/transactions/store', [TransactionController::class, 'store'])->name('transactions.store');
+    Route::delete('/transactions/{transaction}', [TransactionController::class, 'destroy'])->name('transactions.destroy');
+    Route::get('/transactions/{transaction}/edit', [TransactionController::class, 'edit'])->name('transactions.edit');
+    Route::put('/transactions/{transaction}/update', [TransactionController::class, 'update'])->name('transactions.update');
 });
 
 Route::middleware(['guest'])->group(function () {

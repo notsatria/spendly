@@ -69,8 +69,8 @@ class CategoryController extends Controller
         return view('pages.categories.edit', compact('category'));
     }
 
-    public function add()
+    public function create()
     {
-        return view('pages.categories.add');
+        return view('pages.categories.create');
     }
 }
